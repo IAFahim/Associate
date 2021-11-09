@@ -1,0 +1,38 @@
+[
+  {
+    "line": "for(var i = 0; i < arr.length; i++){",
+    "type": "loop"
+  },
+  {
+    "line": "   for(var j = 0; j < ( arr.length - i -1 ); j++){",
+    "type": "loop"
+  },
+  {
+    "line": "       if(arr{j} > arr{j+1}){",
+    "type": "compare"
+  },
+  {
+    "line": "           var temp = arr{j}",
+    "type": "create"
+  },
+  {
+    "line": "           arr{j} = arr{j + 1}",
+    "type": "swap"
+  },
+  {
+    "line": "           arr{j+1} = temp",
+    "type": "swap"
+  },
+  {
+    "line": "       }",
+    "type": "ignore"
+  },
+  {
+    "line": "   }",
+    "type": "ignore"
+  },
+  {
+    "line": "}",
+    "type": "ignore"
+  }
+]
