@@ -10,7 +10,7 @@ let theme = {
     buttonsColorClicked:'#8FD994',
     buttonsTextColor:'#F2F2F2',
     font:"Hack Regular",
-    fontSize:18
+    fontSize:24
 }
 
 window.addEventListener("resize", function () {
@@ -36,11 +36,11 @@ function Button(text,x, y, width, height) {
         c.fillStyle=theme.buttonsColorDefault;
         c.fillRect(this.x, this.y, this.width, this.height);
         c.fillStyle=theme.buttonsTextColor;
-        c.font = theme.fontSize+"px"+theme.font;
-        let size= c.measureText(this.text);
-        c.fillText(this.text,this.x+(size.width/2),this.y+(theme.fontSize/2))
-
-
+        c.font = theme.fontSize+"px "+theme.font;
+        console.log(theme.fontSize+"px "+theme.font)
+        c.textBaseline='middle'
+        c.textAlign='center'
+        c.fillText(this.text,this.x+((this.width)/2),this.y+(theme.fontSize/2))
     }
 }
 
@@ -62,7 +62,7 @@ function CodePrint(code, size ,font, x, y, width, lineSpace) {
     this.lineSpace = lineSpace;
 
     this.draw = function () {
-        c.font = this.size+"px"+this.font;
+        c.font = this.size+"px "+this.font;
         for (let i = 0; i < this.code.length; i++) {
             c.fillText(this.code[i], this.x, this.y + this.lineSpace, this.width)
         }
@@ -77,28 +77,29 @@ function Highlight(x, y, width, lineHeight, lineCount, lineSpace) {
     this.lineHeight = lineHeight;
     this.lineCount = lineCount;
     this.lineSpace = lineSpace;
+    this.end=y;
 
     this.draw = function () {
         c.beginPath();
         if (this.lineCount > 0) {
             c.rect(this.x, this.y, this.width, this.lineHeight);
             for (let i = 0; i < this.lineCount; i++) {
-                c.rect(this.x, this.y += (this.lineHeight + lineSpace), this.width, this.lineHeight);
+                c.rect(this.x, this.y += (this.lineHeight + this.lineSpace), this.width, this.lineHeight);
             }
             c.fillStyle =theme.nullColor;
             c.fill();
         }
-
+        this.end=this.y+this.lineHeight+this.lineSpace;
     }
 }
 
 function inti() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     let h = new Highlight(innerWidth-5, 70, canvas.width * (1 / 3.0), 18, 7, 9);
-    let t=h.width/3;
-    let n= new Button("Next",h.x,h.y,t,20);
-
     h.draw();
+    let t=h.width/3;
+    let n= new Button("Next",h.x,h.end,t,h.lineHeight);
+
     n.draw();
 }
 
