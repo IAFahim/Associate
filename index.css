@@ -1,0 +1,15 @@
+canvas {
+    position: absolute;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 60vw 40vw;
+}
