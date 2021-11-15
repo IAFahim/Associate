@@ -8,8 +8,8 @@ body {
     padding: 0;
 }
 
-#container{
-    display: grid;
-    height: 100vh;
-    grid-template-columns: 60vw 40vw;
-}
+/*@font-face {*/
+/*    font-family: "Hack";*/
+/*    src: url("//cdn.jsdelivr.net/font-hack/2.020/fonts/woff2/hack-regular-webfont.woff2?v=2.020") format("woff2"), url("//cdn.jsdelivr.net/font-hack/2.020/fonts/woff/hack-regular-webfont.woff?v=2.020") format("woff");*/
+/*    font-display: swap;*/
+/*}*/

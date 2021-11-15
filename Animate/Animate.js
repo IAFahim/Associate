@@ -1,33 +1,36 @@
-const app = new PIXI.Application({ backgroundColor: 0x272b34, resizeTo:window});
-document.querySelector("#left").appendChild(app.view);
+const app = new PIXI.Application({backgroundColor: 0x272b34, resizeTo: window, antialias: true});
+document.body.appendChild(app.view);
 
-const rect = new PIXI.Graphics()
-    .beginFill(0x55faaf)
-    .drawRect(-50, -50, 100, 100);
+class CodeViewer extends PIXI.Container{
+    constructor(X, Y, Width, Height, Padding) {
+        super();
+        this.X = X;
+        this.Y = Y;
+        this.Width = Width;
+        this.Height = Height;
+        this.Padding = Padding;
+        this.Box = new PIXI.Graphics();
+        this.Box.interactive = true;
+        this.Box.buttonMode = true;
+        this.Box.on('pointerdown', function (e) {
+            this.x=e.data.global.x-this.width/2;
+            this.y=e.data.global.y-this.height/2;
+        });
+    }
 
-app.stage.addChild(rect);
-
-window.addEventListener('resize', resize);
-
-function resize() {
-
-    const parent = app.view.parentNode;
-
-    app.renderer.resize(parent.clientWidth, parent.clientHeight);
-
-    rect.position.set(
-        app.screen.width / 2 ,
-        app.screen.height / 2
-    );
+    draw = function (stage) {
+        this.Box.beginFill(0xFFFFFF)
+            .drawRect(this.X, this.Y, this.Width, this.Height)
+            .endFill();
+        stage.addChild(this.Box);
+    }
 }
 
-window.onload = function(){
-    resize();
-};
 
-CodeMirror(document.querySelector('#right'), {
-    lineNumbers: true,
-    tabSize: 2,
-    value: 'console.log("Hello, World");'
-});
+let codeViewer = new CodeViewer(0, 0, 100, 100, 0);
+
+codeViewer.draw(app.stage);
+
+
+
 
